@@ -1,35 +1,35 @@
 ﻿@page
-@model SupermarketWeb.Pages.Categories.IndexModel
+@model SupermarketWeb.Pages.Provedores.IndexModel
 @{
-    ViewData["Title"] = "Index Categories";
+    ViewData["Title"] = "Index Provedores";
 }
-<h1>Index Categories</h1>
+<h1>Index Provedores</h1>
 
 <p>
-    <a asp-page="Create" class="btn btn-success">Create New</a>
+    <a asp-page="" class="btn btn-success">Create New</a>
 </p>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Categories[0].Name)
+                @Html.DisplayNameFor(model => model.Provedores[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Categories[0].Description)
+                @Html.DisplayNameFor(model => model.Provedores[0].Descripcion)
             </th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Categories)
+        @foreach (var item in Model.Provedores)
         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @Html.DisplayFor(modelItem => item.Descripcion)
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
