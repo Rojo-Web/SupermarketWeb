@@ -1,0 +1,48 @@
+﻿@page
+@model SupermarketWeb.Pages.Producto.EditModel
+@{
+    ViewData["Title"] = "Edit Product";
+
+}
+
+<h1>Edit</h1>
+
+<h4>Category</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-denger"></div>
+            <input type="hidden" asp-for="Producto.Id" />
+            <div class="form-group">
+                <label asp-for="Producto.Name" class="control-label"></label>
+                <input asp-for="Producto.Name" class="form-control" />
+                <span asp-validation-for="Producto.Name" class="text-denger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Producto.Price" class="control-label"></label>
+                <input asp-for="Producto.Price" class="form-control" />
+                <span asp-validation-for="Producto.Price" class="text-denger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Producto.Stock" class="control-label"></label>
+                <input asp-for="Producto.Stock" class="form-control" />
+                <span asp-validation-for="Producto.Stock" class="text-denger"></span>
+            </div>
+            <div class="form-group" enable="False">
+                <label asp-for="Producto.CategoryId" class="control-label"></label>
+                <input asp-for="Producto.CategoryId" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-page="./Index" class="btn btn-primary">Back to list</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
