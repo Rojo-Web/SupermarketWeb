@@ -11,7 +11,7 @@ using SupermarketWeb.Data;
 namespace SupermarketWeb.Migrations
 {
     [DbContext(typeof(SumpermarketContext))]
-    [Migration("20231111192855_InitialProject")]
+    [Migration("20231112044630_InitialProject")]
     partial class InitialProject
     {
         /// <inheritdoc />
@@ -23,6 +23,21 @@ namespace SupermarketWeb.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CategoryProduct", b =>
+                {
+                    b.Property<int>("CategoriesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoriesId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("CategoryProduct");
+                });
 
             modelBuilder.Entity("SupermarketWeb.Models.Category", b =>
                 {
@@ -42,6 +57,26 @@ namespace SupermarketWeb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("SupermarketWeb.Models.PayMode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Observation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PayModes");
                 });
 
             modelBuilder.Entity("SupermarketWeb.Models.Product", b =>
@@ -67,8 +102,6 @@ namespace SupermarketWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("Products");
                 });
 
@@ -92,20 +125,19 @@ namespace SupermarketWeb.Migrations
                     b.ToTable("Providers");
                 });
 
-            modelBuilder.Entity("SupermarketWeb.Models.Product", b =>
+            modelBuilder.Entity("CategoryProduct", b =>
                 {
-                    b.HasOne("SupermarketWeb.Models.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
+                    b.HasOne("SupermarketWeb.Models.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("SupermarketWeb.Models.Category", b =>
-                {
-                    b.Navigation("Products");
+                    b.HasOne("SupermarketWeb.Models.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
