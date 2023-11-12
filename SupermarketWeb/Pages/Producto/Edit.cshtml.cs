@@ -18,6 +18,8 @@ namespace SupermarketWeb.Pages.Producto
         [BindProperty]
 
         public Product Producto { get; set; }
+        public Product ProductoEdit { get; set; }
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

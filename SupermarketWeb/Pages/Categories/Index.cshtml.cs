@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using SupermarketWeb.Models;
 
 namespace SupermarketWeb.Pages.Categories
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly SumpermarketContext _Context;
